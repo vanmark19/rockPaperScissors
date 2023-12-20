@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-  let computerWon = 0;
+let computerWon = 0;
 let playerWon = 0;
-
+let gameOver = false;
 const h2 = document.querySelector("h2");
 const p = document.querySelector("p");
 
@@ -10,6 +10,9 @@ const p = document.querySelector("p");
 
 
   let playRound = playerChoice => {
+    if (gameOver === true){
+      return;
+    } else {
   
   let computerChoice = Math.floor(Math.random() * 3);     
   
@@ -46,11 +49,17 @@ const p = document.querySelector("p");
       h2.textContent = "It's a draw."
       
     }
-  
-
+  if (computerWon === 5 || playerWon === 5)
+    gameOver = true;
+    if (computerWon === 5)
+      h2.textContent = "You've lost. Better luck next time";
+    else if (playerWon === 5)
+      h2.textContent = "Congrats, you've won!";
+      
   
   }
-  document.querySelector("#rock").addEventListener('click', () => playRound('rock'));
+}
+document.querySelector("#rock").addEventListener('click', () => playRound('rock'));
 document.querySelector("#paper").addEventListener('click', () => playRound('paper'));
 document.querySelector("#scissors").addEventListener('click', () => playRound('scissors'));
 
