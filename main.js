@@ -1,16 +1,15 @@
-let computerWon = 0;
+document.addEventListener('DOMContentLoaded', function () {
+  let computerWon = 0;
 let playerWon = 0;
 
+const h2 = document.querySelector("h2");
+const p = document.querySelector("p");
 
 
 
 
 
-
-let playGame = () => {
-  let playRound = () => {           
-    let playerChoice = prompt().toLowerCase();
-  console.log(`You chose ${playerChoice}`);
+  let playRound = playerChoice => {
   
   let computerChoice = Math.floor(Math.random() * 3);     
   
@@ -25,36 +24,38 @@ let playGame = () => {
     case 2: 
     computerChoice = "scissors";
   }
-  console.log(`The computer chose ${computerChoice}`)
     
     if (playerChoice === "rock" && computerChoice === "paper" ||
         playerChoice === "paper" && computerChoice === "scissors" ||
         playerChoice === "scissors" && computerChoice === "rock"){
-          console.log(`You lost. ${computerChoice} beats ${playerChoice}`);
+          
+          h2.textContent = `You lost. ${computerChoice} beats ${playerChoice}`;
           computerWon++;
-          console.log(`You won ${playerWon} rounds. The computer won ${computerWon} rounds.`);
-          return computerWon;
+          p.textContent = `You've won ${playerWon} round(s). The computer won ${computerWon} round(s).`;
+          
+
     } else if (playerChoice === "rock" && computerChoice === "scissors" ||
                playerChoice === "paper" && computerChoice === "rock" ||
                playerChoice === "scissors" && computerChoice === "paper" ){
-                console.log(`You won. ${playerChoice} beats ${computerChoice}`);
+                h2.textContent = `You won. ${playerChoice} beats ${computerChoice}`;
                 playerWon++;
-                console.log(`You won ${playerWon} rounds. The computer won ${computerWon} rounds.`);
-                return playerWon;
+                p.textContent = `You've won ${playerWon} round(s). The computer won ${computerWon} round(s).`;
+
+                   
     } else {
-      console.log("It's a draw. This round will be repeated");
-      playRound();
+      h2.textContent = "It's a draw."
       
     }
-  }
-  for (let i =1; i<=5; i++){
-    playRound();
-  }
-  if (playerWon > computerWon){
-    console.log("Congrats, you won!");
-  } else {
-    console.log("Better luck next time!");
-  }
-};
+  
 
-playGame();
+  
+  }
+  document.querySelector("#rock").addEventListener('click', () => playRound('rock'));
+document.querySelector("#paper").addEventListener('click', () => playRound('paper'));
+document.querySelector("#scissors").addEventListener('click', () => playRound('scissors'));
+
+
+  
+});
+
+
