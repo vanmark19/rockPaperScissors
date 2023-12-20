@@ -11,7 +11,7 @@ const p = document.querySelector("p");
 
   let playRound = playerChoice => {
     if (gameOver === true){
-      return;
+      return; 
     } else {
   
   let computerChoice = Math.floor(Math.random() * 3);     
